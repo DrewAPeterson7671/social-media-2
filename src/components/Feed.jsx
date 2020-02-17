@@ -1,38 +1,35 @@
-import React from 'react'
-import Tweet from './Tweet'
-import TweetInput from './TweetInput'
+import React from 'react';
+import Tweet from './Tweet';
+import TweetInput from './TweetInput';
+import PropTypes from 'prop-types';
 
-function Feed(){
+
+function Feed(props){
+  console.log('props:', props)
   return(
     <div>
-      <TweetInput/>
-      <div>
-        <Tweet
-          name='User Name'
-          content='I am writing lots of words'/>
-      </div>
-      <div>
-        <Tweet
-          name='Other Name'
-          content='I am writing lots of words'/>
-      </div>
-      <div>
-        <Tweet
-          name='Another Name'
-          content='I am writing lots of words'/>
-      </div>
-      <div>
-        <Tweet
-          name='Yet Other Name'
-          content='I am writing lots of words'/>
-      </div>
-      <div>
-        <Tweet
-          name='Name Name'
-          content='I am writing lots of words'/>
-      </div>
+      <TweetInput
+        addingNewTweetToList={props.onAddingNewTweetToList}
+        onNewTweetCreation={props.handleNewTweetSubmission}/>
+      {props.twitterFeed.map((tweet) =>
+        <Tweet author={tweet.author}
+          tweet= {tweet.tweet}
+          key = {tweet.id} />
+      )}
     </div>
   )
+  console.log(tweet.author)
+  console.log(tweet.tweet)
 }
 
-export default Feed
+Feed.propTypes = {
+  twitterFeed: PropTypes.array
+};
+
+export default Feed;
+
+// <div>
+//   <Tweet
+//     author='User Name'
+//     tweet='I am writing lots of words'/>
+// </div>

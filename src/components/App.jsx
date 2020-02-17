@@ -29,23 +29,44 @@ var rightColumn = {
   float: 'right'
 }
 
-function App(){
-  return (
-    <div className='row'>
-      <div style={header}>
-        <Header/>
+
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      masterTweetList: []
+    };
+    this.handleNewTweetSubmission = this.handleNewTweetSubmission.bind(this);
+  }
+
+  handleNewTweetSubmission(newTweet){
+    console.log(newTweet)
+    var newMasterTweetList = this.state.masterTweetList.slice();
+    newMasterTweetList.push(newTweet);
+    this.setState({masterTweetList: newMasterTweetList});
+  }
+  render(){
+    return (
+      <div className='row'>
+        <div style={header}>
+          <Header/>
+        </div>
+        <div style={leftColumn}>
+          <Badge/>
+        </div>
+        <div style={middleColumn}>
+          <Feed
+            onAddingNewTweetToList={this.handleAddingNewTweetToList}
+            twitterFeed={this.state.masterTweetList}
+            handleNewTweetSubmission={this.handleNewTweetSubmission}
+            />
+        </div>
+        <div style={rightColumn}>
+          <Trends/>
+        </div>
       </div>
-      <div style={leftColumn}>
-        <Badge/>
-      </div>
-      <div style={middleColumn}>
-        <Feed/>
-      </div>
-      <div style={rightColumn}>
-        <Trends/>
-      </div>
-    </div>
-  )
+    )
+  }
 }
 
 export default App
