@@ -56,7 +56,6 @@ class App extends React.Component {
         </div>
         <div style={middleColumn}>
           <Feed
-            onAddingNewTweetToList={this.handleAddingNewTweetToList}
             twitterFeed={this.state.masterTweetList}
             handleNewTweetSubmission={this.handleNewTweetSubmission}
             />
